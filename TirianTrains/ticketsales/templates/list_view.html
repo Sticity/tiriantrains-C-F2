@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Ticket Sales App{% endblock %}
+{% block content %}
+	<style>
+		table, th, td {
+		  border: 1px solid black;
+		  border-collapse: collapse;
+		}
+	</style>
+	
+	<h1>Tickets</h1>
+	<table>
+		<tr>
+			<th>Ticket ID</th>
+			<th>Total Cost</th>
+			<th>Passenger ID</th>
+		</tr>
+		
+		{% for ticket in tickets %}
+			<tr>
+				<td>{{ ticket.id }}</td>
+				<td>{{ ticket.Total_Cost }}</td>
+				<td>{{ ticket.Customer_ID.id }}</td>
+			</tr>
+		{% endfor %}
+	</table>
+{% endblock %}

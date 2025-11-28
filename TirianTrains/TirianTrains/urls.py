@@ -20,4 +20,6 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('ticketsales/', include('ticketsales.urls', namespace='ticketsales')),]
+    path('ticketsales/', include('ticketsales.urls', namespace='ticketsales')),
+    #path('', include('menu.urls')),
+]

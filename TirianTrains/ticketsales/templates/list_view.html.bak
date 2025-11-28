@@ -26,7 +26,7 @@
 				<td>
 					{% for passenger in passengers %}
 						{% if passenger.id == ticket.Customer_ID.id %}
-							{{ passenger.Given_Name }} {{ passenger.Middle_Initial }}. {{ passenger.Last_Name }}
+							{{ passenger.Given_Name }} {{ passenger.Middle_Initial }} {{ passenger.Last_Name }}
 						{% endif %}
 					{% endfor %}
 				</td>

@@ -1,8 +1,8 @@
 from django.urls import path
-from .views import tickets_list, ticket
+from .views import lists, ticket
 
 urlpatterns = [
-    path('tickets/', tickets_list, name='list_view'),
+    path('', lists, name='list_view'),
     path('ticket/<int:id>/', ticket, name='detail_view'),
 ]
 

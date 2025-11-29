@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Ticket Sales App{% endblock %}
+{% block content %}
+	<style>
+		table, th, td {
+		  border: 1px solid black;
+		  border-collapse: collapse;
+		}
+	</style>
+	
+	<h1>Ticket Details</h1>
+	<table>
+		<tr>
+			<th colspan="7">TRAIN TICKET</th>
+		</tr>
+		
+			<tr style="border:0px">
+				<th>Customer ID:</th>
+				<td>{{ passenger.id }}</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<th>Date:</th>
+				<td>{{ ticket.Date }}</td>
+			</tr>
+			
+			<tr style="border:0px">
+				<th>Name:</th>
+				<td>{{ passenger.Given_Name }} {{ passenger.Middle_Initial }}. {{ passenger.Last_Name }}</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<th>Birth Date:</th>
+				<td>{{ passenger.Birth_Date }}</td>
+			</tr>
+			
+			<tr style="border:0px">
+				<th>Gender:</th>
+				<td>{{ passenger.Gender }}</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<th>Total Cost:</th>
+				<td>{{ total_cost }} Lion Coins</td>
+			</tr>
+		
+		<tr>
+			<th colspan="7">TRIP ITINERARY</th>
+		</tr>
+		
+		<tr>
+			<th>Train #</th>
+			<th>Origin</th>
+			<th>Destination</th>
+			<th>Departure</th>
+			<th>Arrival</th>
+			<th>Duration</th>
+			<th>Cost</th>
+		</tr>
+		
+		{% for entry in itinerary_entries %}
+			<tr>
+				<td>{{ entry.Trip_ID.Train_ID }}</td>
+				<td>{{ entry.Trip_ID.Route_ID.Origin_ID.Name }}</td>
+				<td>{{ entry.Trip_ID.Route_ID.Destination_ID.Name }}</td>
+				<td>{{ entry.Trip_ID.Departure_Time }}</td>
+				<td>{{ entry.Trip_ID.Arrival_Time }}</td>
+				<td>{{ entry.Trip_ID.Route_ID.Duration }}</td>
+				<td>{{ entry.Trip_ID.Route_ID.Cost }} Lion Coins</td>
+			</tr>
+		{% endfor %}
+	</table>
+{% endblock %}

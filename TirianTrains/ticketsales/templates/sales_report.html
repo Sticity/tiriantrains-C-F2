@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Ticket Sales App{% endblock %}
+{% block content %}
+	<style>
+		table, th, td {
+		  border: 1px solid black;
+		  border-collapse: collapse;
+		}
+	</style>
+	
+	<h1>Sales Report</h1>
+	
+	<form method="get">
+		{{ form.as_p }}
+		<button type="submit">Filter</button>
+	</form>
+	<br>
+	<table>
+		<tr>
+			<th>Route</th>
+			<th>Total Tickets Sold</th>
+			<th>Total Revenue</th>
+		</tr>
+		{% for ticket in sales %}
+			<tr>
+				<td>{{ ticket.Route }}</td>
+				<td>{{ ticket.Total_Tickets_Sold }}</td>
+				<td>{{ ticket.Total_Revenue }}</td>
+			</tr>
+		{% endfor %}
+	</table>
+{% endblock %}

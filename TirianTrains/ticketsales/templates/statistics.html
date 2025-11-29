@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Ticket Sales App{% endblock %}
+{% block content %}
+	<style>
+		table, th, td {
+		  border: 1px solid black;
+		  border-collapse: collapse;
+		}
+	</style>
+	
+	<h1>General Statistics</h1>
+	<table>
+		<tr>
+			<th>Customers and Amount of Tickets Bought</th>
+		</tr>
+		
+		<tr>
+			<th>Customer</th>
+			<th>Tickets Bought</th>
+		</tr>
+
+		
+		{% for passenger in passengers_bought %}
+			<tr>
+				<td>{{ passenger.Customer }}</td>
+				<td>{{ passenger.Tickets_Bought }}</td>
+			</tr>
+		{% endfor %}
+	</table>
+	
+	<table>
+		<tr>
+			<th>Travel History for Sherlock Holmes</th>
+		</tr>
+		
+		<tr>
+			<th> Customer </th>
+			<th> Ticket ID </th>
+			<th> Date </th>
+			<th> Ticket Cost </th>
+			<th> Route </th>
+			<th> Departure Time </th>
+		</tr>
+		
+		{% for passenger in history_sherlock %}
+			<tr>
+				<td>{{ passenger.Customer }}</td>
+				<td>{{ passenger.Ticket_ID.id }}</td>
+				<td>{{ passenger.Date }}</td>
+				<td>{{ passenger.Ticket_Cost }}</td>
+				<td>{{ passenger.Route }}</td>
+				<td>{{ passenger.Departure }}</td>
+			</tr>
+		{% endfor %}
+	</table>
+	
+	<table>
+		<tr>
+			<th>Route Popularity per Gender</th>
+		</tr>
+		
+		<tr>
+			<th> Gender </th>
+			<th> Route </th>
+			<th> Total Tickets </th>
+		</tr>
+
+		
+		{% for passenger in route_gender %}
+			<tr>
+				<td>{{ passenger.Gender }}</td>
+				<td>{{ passenger.Route }}</td>
+				<td>{{ passenger.Total_Tickets }}</td>
+			</tr>
+		{% endfor %}
+	</table>
+	
+	<table>
+		<tr>
+			<th>Destination per Gender</th>
+		</tr>
+		
+		<tr>
+			<th> Gender </th>
+			<th> Destination </th>
+			<th> Tickets Bought </th>
+		</tr>
+
+		
+		{% for passenger in destination_gender %}
+			<tr>
+				<td>{{ passenger.Gender }}</td>
+				<td>{{ passenger.Destination }}</td>
+				<td>{{ passenger.Tickets_Bought }}</td>
+			</tr>
+		{% endfor %}
+	</table>
+	
+	<table>
+		<tr>
+			<th>Revenue for Local</th>
+		</tr>
+		
+		<tr>
+			<th> Route </th>
+			<th> Total Tickets Sold </th>
+			<th> Total Revenue </th>
+		</tr>
+
+		{% for ticket in revenue_local %}
+			<tr>
+				<td>{{ ticket.Route }}</td>
+				<td>{{ ticket.Total_Tickets_Sold }}</td>
+				<td>{{ ticket.Total_Revenue }}</td>
+			</tr>
+		{% endfor %}
+	</table>
+{% endblock %}

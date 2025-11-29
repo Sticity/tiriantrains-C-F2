@@ -11,23 +11,12 @@ class Passenger(models.Model):
     Given_Name = models.CharField(max_length=255)
     Last_Name = models.CharField(max_length=255)
     Middle_Initial = models.CharField(max_length=1)
-    Birth_Date = models.DateTimeField()
+    Birth_Date = models.DateField()
     Gender = models.CharField(choices=gender_options)
 
 class Ticket(models.Model):
     Customer_ID = models.ForeignKey(Passenger,null=True,on_delete=models.SET_NULL,db_column="customerid")
-    Date = models.DateTimeField()
-    Total_Cost = models.IntegerField(default=0)
-
-class Trip(models.Model):
-    Date = models.DateTimeField()
-    Train_ID = models.IntegerField(default=0)
-    Arrival_Time = models.TimeField()
-    Departure_Time = models.TimeField()
-
-class ItineraryEntry(models.Model):
-    Ticket_ID = models.ForeignKey(Ticket,null=True,on_delete=models.SET_NULL)
-    Trip_ID = models.ForeignKey(Trip,null=True,on_delete=models.SET_NULL)
+    Date = models.DateField()
 
 class Station(models.Model):
     locality_options = [
@@ -38,8 +27,17 @@ class Station(models.Model):
     Name = models.CharField(max_length=255)
     Locality = models.CharField(choices=locality_options)
 
-
 class Route(models.Model):
-    Station_ID = models.ForeignKey(Station,null=True,on_delete=models.SET_NULL)
+    Origin_ID = models.ForeignKey(Station,null=True,on_delete=models.SET_NULL,db_column="originid",related_name="OGID")
+    Destination_ID = models.ForeignKey(Station,null=True,on_delete=models.SET_NULL,db_column="destinationid",related_name="DEID")
     Cost = models.IntegerField(default=0)
     Duration = models.TimeField()
+    
+class Trip(models.Model):
+    Route_ID = models.ForeignKey(Route,null=True,on_delete=models.SET_NULL,db_column="routeid")
+    Train_ID = models.IntegerField(default=0)
+    Departure_Time = models.TimeField()
+
+class ItineraryEntry(models.Model):
+    Ticket_ID = models.ForeignKey(Ticket,null=True,on_delete=models.SET_NULL,db_column="ticketid")
+    Trip_ID = models.ForeignKey(Trip,null=True,on_delete=models.SET_NULL,db_column="tripid")

@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Ticket Sales App{% endblock %}
+{% block content %}
+	<style>
+		table, th, td {
+		  border: 1px solid black;
+		  border-collapse: collapse;
+		}
+	</style>
+	
+	<h1>Database</h1>
+	<table>
+		<tr>
+			<th>PASSENGERS</th>
+		</tr>
+		
+		<tr>
+			<th>Passenger ID</th>
+			<th>Given Name</th>
+			<th>Middle Initial</th>
+			<th>Last Name</th>
+			<th>Birth Date</th>
+			<th>Gender</th>
+		</tr>
+		
+		{% for passenger in passengers %}
+			<tr>
+				<td>{{ passenger.id }}</td>
+				<td>{{ passenger.Given_Name }}</td>
+				<td>{{ passenger.Middle_Initial }}</td>
+				<td>{{ passenger.Last_Name }}</td>
+				<td>{{ passenger.Birth_Date }}</td>
+				<td>{{ passenger.Gender }}</td>
+			</tr>
+		{% endfor %}
+	</table>
+	
+	<table>
+		<tr>
+			<th>TICKETS</th>
+		</tr>
+		
+		<tr>
+			<th>Ticket ID</th>
+			<th>Customer ID</th>
+			<th>Date</th>
+		</tr>
+		
+		{% for ticket in tickets %}
+			<tr>
+				<td>{{ ticket.id }}</td>
+				<td>{{ ticket.Customer_ID.id }}</td>
+				<td>{{ ticket.Date }}</td>
+			</tr>
+		{% endfor %}
+	</table>
+	
+	<table>
+		<tr>
+			<th>ITINERARY ENTRIES</th>
+		</tr>
+		
+		<tr>
+			<th>Entry ID</th>
+			<th>Ticket ID</th>
+			<th>Trip ID</th>
+		</tr>
+		
+		{% for entry in itinerary_entries %}
+			<tr>
+				<td>{{ entry.id }}</td>
+				<td>{{ entry.Ticket_ID.id }}</td>
+				<td>{{ entry.Trip_ID.id }}</td>
+			</tr>
+		{% endfor %}
+	</table>
+	
+	<table>
+		<tr>
+			<th>TRIPS</th>
+		</tr>
+		
+		<tr>
+			<th>Trip ID</th>
+			<th>Route ID</th>
+			<th>Train ID</th>
+			<th>Departure Time</th>
+		</tr>
+		
+		{% for trip in trips %}
+			<tr>
+				<td>{{ trip.id }}</td>
+				<td>{{ trip.Route_ID.id }}</td>
+				<td>{{ trip.Train_ID }}</td>
+				<td>{{ trip.Departure_Time}}</td>
+			</tr>
+		{% endfor %}
+	</table>
+	
+	<table>
+		<tr>
+			<th>ROUTES</th>
+		</tr>
+		
+		<tr>
+			<th>Route ID</th>
+			<th>Origin ID</th>
+			<th>Destination ID</th>
+			<th>Cost</th>
+			<th>Duration</th>
+		</tr>
+		
+		{% for route in routes %}
+			<tr>
+				<td>{{ route.id }}</td>
+				<td>{{ route.Origin_ID.id }}</td>
+				<td>{{ route.Destination_ID.id }}</td>
+				<td>{{ route.Cost }}</td>
+				<td>{{ route.Duration }}</td>
+			</tr>
+		{% endfor %}
+	</table>
+	
+	<table>
+		<tr>
+			<th>STATION</th>
+		</tr>
+		
+		<tr>
+			<th>Station ID</th>
+			<th>Name</th>
+			<th>Locality</th>
+		</tr>
+		
+		{% for station in stations %}
+			<tr>
+				<td>{{ station.id }}</td>
+				<td>{{ station.Name }}</td>
+				<td>{{ station.Locality }}</td>
+			</tr>
+		{% endfor %}
+	</table>
+{% endblock %}

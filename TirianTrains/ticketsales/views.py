@@ -14,7 +14,7 @@ def format_duration(duration_time):
     if minutes > 0:
         parts.append(f'{minutes} minute' + ('s' if minutes > 1 else ''))
 
-    return " ".join(parts) if parts else '0 minutes'
+    return ' '.join(parts) if parts else '0 minutes'
 
 # Main Query
 def sales_reports(request):
@@ -74,10 +74,11 @@ def general_statistics(request):
         # Travel History for Sherlock Holmes
         '''
         SELECT
+            ticketsales_passenger.id,
             CONCAT(ticketsales_passenger.Given_Name, ' ',
             ticketsales_passenger.Middle_Initial, '. ',
             ticketsales_passenger.Last_Name) AS Customer,
-            ticketsales_ticket.id,
+            ticketsales_ticket.id AS Ticket_ID,
             ticketsales_ticket.Date AS Date,
             ticketsales_route.Cost AS Ticket_Cost,
             CONCAT(origin.Name, ' -> ', destination.Name) AS Route,
@@ -162,6 +163,33 @@ def general_statistics(request):
 
 # Full Database + Custom Queries + Ticket, Passenger, ItineraryEntry Creation
 def full_database(request):
+    if request.method == 'POST':
+
+        # which form was submitted
+        if 'passenger_submit' in request.POST:
+            passenger_form = PassengerForm(request.POST)
+            if passenger_form.is_valid():
+                passenger_form.save()
+                return redirect('ticketsales:full_database')
+
+        elif 'ticket_submit' in request.POST:
+            ticket_form = TicketForm(request.POST)
+            if ticket_form.is_valid():
+                ticket_form.save()
+                return redirect('ticketsales:full_database')
+
+        elif 'itinerary_submit' in request.POST:
+            itinerary_form = ItineraryEntryForm(request.POST)
+            if itinerary_form.is_valid():
+                itinerary_form.save()
+                return redirect('ticketsales:full_database')
+
+    else:
+        passenger_form = PassengerForm()
+        ticket_form = TicketForm()
+        itinerary_form = ItineraryEntryForm()
+
+    # query data
     passengers = Passenger.objects.all()
     tickets = Ticket.objects.all()
     itinerary_entries = ItineraryEntry.objects.all()
@@ -177,7 +205,11 @@ def full_database(request):
                                                   'itinerary_entries':itinerary_entries,
                                                   'trips':trips,
                                                   'routes':routes,
-                                                  'stations':stations})
+                                                  'stations':stations,
+
+                                                  'passenger_form':passenger_form,
+                                                  'ticket_form':ticket_form,
+                                                  'itinerary_form':itinerary_form})
     
 
 # Ticket Details (replicates the table in proj case)

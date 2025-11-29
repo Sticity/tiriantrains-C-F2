@@ -3,8 +3,53 @@
 <head>
 	<title>{% block title %}{% endblock %}</title>
 </head>
-<body>
+<body style="margin-top: 0px; width:100%; margin:0 auto; font-family:verdana;">
+	<style>
+		.topnav {
+			text-align: center;
+			padding: 40px;
+			background-color: #f9f9f9;
+		}
+
+		.topnav a {
+			margin: 0 15px;
+			text-decoration: none;
+			font-size: 20px;
+			color: #333;
+		}
+		
+		.topnav h1 {
+			font-size: 40px;
+			margin: 0;
+		}
+	</style>
+	
+	<div class="topnav">
+		<h1 style="font-size:40px">{% block header %}{% endblock%}</h1>
+		<a href="{% url 'ticketsales:sales_reports' %}">Sales Report</a>
+		<a href="{% url 'ticketsales:full_database' %}">Database</a>
+		<a href="{% url 'ticketsales:general_statistics' %}">General Statistics</a>
+	</div>
+
 	<div style="width:75vw; margin:auto; padding-top:50px">
+		<style>
+			table {
+				border-collapse: separate;
+				border-spacing: 10px;
+				background-color: #f9f9f9;
+				
+				margin-left: auto;
+				margin-right: auto;
+				margin-bottom: 50px;
+			  }
+
+			  td, th {
+				background-color: #f0f0f0;
+				border: 8px solid transparent;
+				padding: 8px;
+				text-align: center;
+			  }
+		</style>
 		{% block content %}{% endblock %}
 	</div>
 </body>

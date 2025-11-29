@@ -2,17 +2,10 @@
 {% load static %}
 {% block title %}Ticket Sales App{% endblock %}
 {% block content %}
-	<style>
-		table, th, td {
-		  border: 1px solid black;
-		  border-collapse: collapse;
-		}
-	</style>
-	
 	<h1>General Statistics</h1>
 	<table>
 		<tr>
-			<th>Customers and Amount of Tickets Bought</th>
+			<th colspan="2">Customers and Amount of Tickets Bought</th>
 		</tr>
 		
 		<tr>
@@ -31,7 +24,7 @@
 	
 	<table>
 		<tr>
-			<th>Travel History for Sherlock Holmes</th>
+			<th colspan="6">Travel History for Sherlock Holmes</th>
 		</tr>
 		
 		<tr>
@@ -46,7 +39,7 @@
 		{% for passenger in history_sherlock %}
 			<tr>
 				<td>{{ passenger.Customer }}</td>
-				<td>{{ passenger.Ticket_ID.id }}</td>
+				<td><a href="{% url 'ticketsales:ticket_detail' passenger.Ticket_ID %}">{{ passenger.Ticket_ID }}</a></td>
 				<td>{{ passenger.Date }}</td>
 				<td>{{ passenger.Ticket_Cost }}</td>
 				<td>{{ passenger.Route }}</td>
@@ -57,7 +50,7 @@
 	
 	<table>
 		<tr>
-			<th>Route Popularity per Gender</th>
+			<th colspan="3">Route Popularity per Gender</th>
 		</tr>
 		
 		<tr>
@@ -78,7 +71,7 @@
 	
 	<table>
 		<tr>
-			<th>Destination per Gender</th>
+			<th colspan="3">Destination per Gender</th>
 		</tr>
 		
 		<tr>
@@ -99,7 +92,7 @@
 	
 	<table>
 		<tr>
-			<th>Revenue for Local</th>
+			<th colspan="3">Revenue for Local</th>
 		</tr>
 		
 		<tr>
@@ -116,4 +109,9 @@
 			</tr>
 		{% endfor %}
 	</table>
+	
+	<br>
+	<br>
+	<br>
+	
 {% endblock %}
